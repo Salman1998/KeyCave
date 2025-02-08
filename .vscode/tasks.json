@@ -3,6 +3,19 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "ng build",
+      "type": "shell",
+      "command": "ng build",
+      "problemMatcher": []
+      },
+      {
+        "label": "firebase deploy",
+        "type": "shell",
+        "command": "firebase deploy",
+        "dependsOn": "ng build",
+        "problemMatcher": []
+      },
+    {
       "type": "npm",
       "script": "start",
       "isBackground": true,
