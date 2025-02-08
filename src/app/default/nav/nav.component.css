@@ -1,0 +1,216 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #424242;
+    padding: 0.5rem 1rem;
+    z-index: 998;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.brand-title {
+    font-size: 1.3rem;
+    color: white;
+}
+
+.navbar-links {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin-left: -40px;
+}
+
+.navbar-links ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    position: relative;
+}
+
+.navbar-links li {
+    padding: 0 1rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #424242;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    flex-direction: column;
+    margin-top: 13px;
+    margin-left: 1rem;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+.dropdown-content.show {
+    display: flex; 
+}
+
+.auth-buttons {
+    display: flex;
+}
+
+.auth-buttons button {
+    margin-left: 1rem;
+    padding: 0.3rem 0.8rem;
+    border: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-buttons button:hover {
+    background-color: #00aced;
+}
+
+.toggle-button {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 992px) {
+    .navbar{
+        flex-direction: column;
+    }
+    .toggle-button {
+        display: flex;
+        position: absolute;
+        top: 12px;
+        right: 16px;
+    }
+    .brand-title{
+        padding-bottom: 3px;
+        text-align: left;
+        width: 100%;
+    }
+    .navbar-links {
+        display: none;
+        width: 100%;
+        margin: 0;
+        transition: 0.5s;
+    }
+
+    .navbar-links ul {
+        width: 350px;
+        height: calc(100vh - 500px);
+        display: block;
+        position: absolute;
+        background-color: #424242;
+        left: 0;
+        margin-top: 8px;
+        z-index: 998;
+        
+    }
+
+    .navbar-links li {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #6b6b6b;
+        transition: 0.5s;
+    }
+
+    .navbar-links li.topLi{
+        border-top: 1px solid #6b6b6b;
+    }
+
+    .navbar-links.active {
+        display: flex;
+        transition: 0.5s;
+    }
+
+    .dropdown-content {
+        box-shadow: none;
+        width: 100%;
+        margin-top: 0;
+        z-index: 998;
+    }
+    .auth-buttons{
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        width: 350px;
+        height: calc(100vh - 50px);
+        position: absolute;
+        left: 0;
+        top: 50px;
+        display: none;
+        background-color: #424242;
+    }
+    .auth-buttons button{
+        margin-left: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid #6b6b6b;
+        background-color: transparent;
+    }
+    .auth-buttons .login-btn{
+        border-top: 1px solid #6b6b6b;
+    }
+    .auth-buttons .logout-btn{
+        border-top: 1px solid #6b6b6b;
+    }
+    .auth-buttons.active{
+        display: flex;
+    }
+    .navbar-links ul li.dropdown {
+        border-bottom: 1px solid #6b6b6b;
+    }
+}
+
+@media screen and (max-width: 768px){
+
+}
+
+@media screen and (max-width: 576px){
+    .navbar-links ul{
+        width: 100%;
+    }
+    .navbar-links ul li a{
+        width: 100%;
+        display: block;
+    }
+    .auth-buttons{
+        width: 100%;
+    }
+}
+

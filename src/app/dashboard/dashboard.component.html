@@ -1,0 +1,17 @@
+<div class="container" *ngIf="userData$ | async as userData">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0;" >
+        <h3>Dashboard</h3>
+        <button class="btn btn-primary" *ngIf="userData.type === 'superuser'" routerLink="/admin-panel" style="max-width: 140px;">Access control</button>
+    </div>
+    <hr>
+    <p>
+        Name: {{userData.name}} <br>
+        UID: {{userData.uid}} <br>
+        Email: {{userData.email}} <br>
+        Create on: {{userData.createdAt}} <br>
+        <span *ngIf="isAdmin">User type: {{userData.type}}</span> <br>
+    </p> 
+
+    <app-admin></app-admin>
+</div>

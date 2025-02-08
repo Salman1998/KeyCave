@@ -1,0 +1,55 @@
+    <div class="container">
+      <table class="table table-hover" *ngIf="isAdmin">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Type</th>
+                  <th>Edit</th>
+                  <th *ngIf="superUser">Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of users; let i = index">
+                  <th>{{ i + 1 }}</th>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.email }}</td>
+                  <td [ngClass]="item.type === 'admin' ? 'admin' : item.type === 'superuser' ? 'superuser' : 'user'">
+                      <!-- {{ item.type === 'superuser' ? 'Superuser' : item.type }} -->
+                      {{ item.type }}
+                  </td>
+                  <td><i class="fa-regular fa-pen-to-square ticon" (click)="onOpenEdit(item.key, i)"></i></td>
+                  <td *ngIf="superUser">
+                      <i class="fa-solid fa-trash ticon" (click)="onDelete(item.key)"></i>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  
+      <div class="overlay" *ngIf="editState.isEdit && (isAdmin || superUser)">
+          <div class="form-container">
+              <form (ngSubmit)="onSubmitEdit()" #editForm="ngForm">
+                  <h2>Edit User</h2>
+                  <label for="name">Name:</label>
+                  <input id="name" name="name" [(ngModel)]="editState.editValue.name" required>
+  
+                  <label for="email">Email:</label>
+                  <input id="email" name="email" [(ngModel)]="editState.editValue.email" type="email" required>
+  
+                  <label for="type">Type:</label>
+                  <select id="type" name="type" [(ngModel)]="editState.editValue.type" required>
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                      <option value="superuser" *ngIf="superUser">Superuser</option>
+                  </select>
+  
+                  <div class="btn-box">
+                      <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Submit</button>
+                      <button type="button" class="btn btn-danger" (click)="onCloseEdit()">Close</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  

@@ -1,0 +1,98 @@
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0;" >
+        <h3>Modifiers</h3>
+        <button class="btn btn-primary" (click)="onAddModifier()">Add</button>
+        <!-- <button class="btn btn-primary" (click)="onStoreData()">Fatch</button> -->
+    </div>
+    <hr>
+
+    <div class="filter-box" style="width: 500px; margin-bottom: 10px; position: relative;" (keydown.esc)="onClearSearch()">
+        <input class="search-input" type="text" placeholder="Enter value to search" [(ngModel)]="filterData" class="form-control">
+        <i class="fa-solid fa-xmark search-input-close" *ngIf="filterData" (click)="onClearSearch()"></i>
+    </div>
+
+    <table class="table table-hover" >
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: center;">Code</th>
+            <th scope="col" style="text-align: center;">Description</th>
+            <th scope="col" style="text-align: center;">Note</th>
+            <th scope="col" style="text-align: center;" *ngIf="superUser">Edit</th>
+            <th scope="col" style="text-align: center;" *ngIf="superUser">Delete</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of modifiers; let i = index">
+          <tr *ngFor="let entry of item | keyvalue | filterDataModifier:filterData">
+                <th style="position: relative; left: 0; width: 116px;" (mouseenter)="codeHover.showText(entry?.value.code)" (mouseleave)="codeHover.hideText()"><app-hover-text #codeHover></app-hover-text><div class="contentBox">{{ entry?.value.code }}</div></th>
+                <td style="position: relative; left: 0; width: 700px;" (click)="descCopy.onClicked(entry?.value.desc)"> <app-copytoclip #descCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.desc)"><div class="contentBox" style="justify-content: flex-start;">{{ entry?.value.desc }}</div></span> </td>
+                <td> <div class="contentBox"><i class="fa-regular fa-note-sticky" style="cursor: pointer;" (click)="noteBox.openNote(entry?.value.note, entry?.key, 'modifiers')"></i> <app-notepopup #noteBox></app-notepopup></div> </td> 
+                <td *ngIf="superUser"><div class="contentBox"><i class="fa-regular fa-pen-to-square ticon" (click)="onOpenEdit(entry?.key, i)"></i></div></td>
+                <td *ngIf="superUser"><div class="contentBox"><a><i class="fa-solid fa-trash ticon" (click)="onDeleted(entry?.key)"></i></a></div></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div class="stick-box" *ngIf="isAdded || isEdit">
+  <div class="p-box"  *ngIf="isAdded">
+    <div class="p-contect">
+          <div class="form-container">
+              <h2>Contact Form</h2>
+              <form #Addform="ngForm" (ngSubmit)="onSubmitAddedModifier(Addform)">
+                  <div class="form-row">
+                      <div class="form-group">
+                          <label for="code">Modifier Code</label>
+                          <input type="text" id="code" ngModel name="code" placeholder="Enter modifier code">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group">
+                          <label for="phone">Description</label>
+                          <input type="desc" id="desc" ngModel name="desc" placeholder="Enter description">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="note">Note</label>
+                      <textarea id="note" ngModel name="note"  placeholder="Enter your note"></textarea>
+                  </div>
+  
+                  <div class="btn-box">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="button" class="btn btn-danger" (click)="onClose()">Cancel</button>
+                  </div>
+              </form>
+        </div>
+    </div>
+  </div>
+
+<div class="p-box"  *ngIf="isEdit">
+  <div class="p-contect">
+      <div class="form-container">
+          <h2>Contact Form</h2>
+          <form #Editform="ngForm" (ngSubmit)="onSubmitEdit(Editform)">
+              <div class="form-row">
+                  <div class="form-group">
+                    <label for="code">Modifier Code</label>
+                      <input type="code" id="code" [ngModel]="editValue.code" name="code" placeholder="Enter modifier code">
+                  </div>              
+              </div>
+              <div class="form-row">
+                  <div class="form-group">
+                    <label for="desc">Description</label>
+                      <input type="text" id="desc" [ngModel]="editValue.desc" name="desc" placeholder="Enter description">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="note">Note</label>
+                  <textarea id="note" [ngModel]="editValue.note" name="note"  placeholder="Enter your note"></textarea>
+              </div>
+          
+              <div class="btn-box">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-danger" (click)="onClose()">Cancel</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+</div>

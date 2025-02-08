@@ -1,0 +1,219 @@
+/*
+.heading-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    
+}
+hr{
+    padding: 0;
+}
+.heading-box .fa-xmark{
+    font-size: 20px;
+}
+
+.close-button{
+    border: none;
+    background-color: transparent;
+}
+
+.heading-box .fa-xmark:hover{
+    color: red
+}
+form{
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+
+}
+.content-box{
+    width: 100%;
+    height: 100%;
+    padding-top: 5px;
+    
+}
+
+.content-box textarea{
+    width: 100%;
+    resize: none;
+    height: 100%;
+    overflow-y: scroll;
+    border: none;
+    outline: none;
+    margin-left: -1px;
+}
+.content-box textarea:focus{
+    border: none;
+    outline: none;
+    border-color: #ccc;
+}
+
+.note-container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 990;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.overlay {
+    position: static; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998; 
+}
+
+.note-outter {
+    width: 60%;
+    height: 85%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 990;
+}
+
+.note-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+*/
+/* Container for the note */
+/* Container for the note */
+.note-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Outer box for the note */
+.note-outter {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 900px; /* Limit maximum width for better readability */
+    height: 580px;
+    max-height: 680px;
+    overflow: hidden;
+}
+
+/* Inner box for the note */
+.note-inner {
+    padding: 20px;
+}
+
+/* Heading box with the title and close button */
+.heading-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.heading-box h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333333;
+}
+
+/* Close button styling */
+.close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666666;
+    font-size: 1.25rem;
+    padding: 5px;
+}
+
+/* Content box for the textarea */
+.content-box {
+    margin-bottom: 15px;
+}
+
+/* Textarea styling */
+textarea.form-control {
+    width: 100%;
+    min-height: 400px;
+    /* min-height: 150px; */
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333333;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+textarea.form-control[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+/* Button box styling */
+.btn-box {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Button styling */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+/* Flexbox for edit mode buttons */
+.btn-box[style*="display: flex"] {
+    justify-content: space-between;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .note-outter {
+        width: 95%;
+    }
+
+    .btn-box {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

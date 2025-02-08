@@ -1,0 +1,28 @@
+<div class="container-fluid p-0 m-0">
+<div class="row p-0 m-0">
+<div class="col-12 p-0 m-0 checkBox">
+<nav class="navbar">
+    <div class="brand-title"><a routerLink="/" style="cursor: pointer; display: block; text-decoration: none; color: #fff;">KeyCave</a></div>
+    <a class="toggle-button pt-1" (click)="toggleNavbar()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+    <div class="navbar-links" *ngIf="isAuth">
+      <ul>
+        <li class="topLi"><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/dashboard">Dashboard</a></li>
+        <li><a routerLink="/website">Website</a></li>
+        <li><a routerLink="/recycle-bin">Recycle Bin</a></li>
+      </ul>
+    </div>
+    <div class="auth-buttons" [class.show]="dropdownOpen">
+      <button class="login-btn" [routerLink]="['/login']" *ngIf="!isAuth">Login</button>
+      <button class="logout-btn" style="border-top: none;" (click)="onLogout()" *ngIf="isAuth">Logout</button>
+      <button class="signup-btn" style="border-bottom: none;" [routerLink]="['/signup']" *ngIf="!isAuth">Sign Up</button>
+    </div>
+</nav>
+
+</div>
+</div>
+</div>

@@ -1,0 +1,34 @@
+<div class="note-container" *ngIf="isVisible" aria-live="polite">
+    <div class="note-outter" role="dialog" aria-labelledby="noteTitle" aria-modal="true">
+        <div class="note-inner">
+            <div class="heading-box border-bottom">
+                <h4 id="noteTitle">Notes</h4>
+                <button type="button" aria-label="Close" class="close-button" (click)="closeNote()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="content-box">
+                <form #noteForm="ngForm" (ngSubmit)="onSave()">
+                    <textarea
+                        id="notes"
+                        name="notes"
+                        class="form-control"
+                        [(ngModel)]="webNote"
+                        [readonly]="!isEdit"
+                        [attr.aria-readonly]="!isEdit"
+                        aria-label="Notes text area"
+                        required
+                    ></textarea>
+                </form>
+            </div>
+            
+            <div class="btn-box" *ngIf="!isEdit">
+                <button type="button" class="btn btn-primary" (click)="onEdit()" *ngIf="isAdmin">Edit</button>
+            </div>
+            <div class="btn-box" *ngIf="isEdit" style="display: flex; justify-content: space-between;">
+                <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onEditClosed()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

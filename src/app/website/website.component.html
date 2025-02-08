@@ -1,0 +1,276 @@
+
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  
+
+
+<div class="container" *ngIf="!isLoading">
+
+    <div class="headerBox">
+        <h3>Website</h3>
+        <div class="otherBox">
+          <div class="export-box" >
+            <ul>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Download
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item">
+                    <app-export-excel></app-export-excel>
+                  </a></li>
+                  <li><a class="dropdown-item">
+                    <app-export-json></app-export-json>
+                  </a></li>
+                </ul>
+              </li>
+            </ul>
+            </div>
+          <button class="btn btn-primary" (click)="onAddWebsite()">Add</button>
+        </div>
+    </div>
+    <hr>
+    <div class="headerBox">
+        <div class="filter-box" style="width: 500px; margin-top: 3px; position: relative;" (keydown.esc)="onClearSearch()">
+            <input class="search-input" type="text" placeholder="Enter value to search" class="form-control" [(ngModel)]="filterData" (keyup)="filterDataSave()">
+            <i class="fa-solid fa-xmark search-input-close" *ngIf="filterData" (click)="onClearSearch()"></i>
+        </div>
+
+        <div class="filterselect" *ngIf="role === 'superuser'">
+          <select [(ngModel)]="selectedUser">
+            <option value="">All Users</option>
+            <option *ngFor="let user of selectUser | keyvalue" [value]="user.value.uid">{{ user.value.name }}</option>
+          </select>          
+        </div>
+        
+    </div>
+
+<div *ngIf="role === 'superuser'; else userPanel">
+
+   <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">User id</th>
+        <th scope="col">Password</th>
+        <th scope="col">URL</th>
+        <th scope="col">Note</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let entry of websites | keyvalue | filterDataWebsiteUser:selectedUser | filterDataWebsite:filterData; let i = index">
+          <th>{{ i+1 }}</th>
+          <td class="webName-fixed-width" style="position: relative; left: 0;" (mouseenter)="nameHover.showText(entry?.value.name)" (mouseleave)="nameHover.hideText()"><app-hover-text #nameHover></app-hover-text>{{ entry?.value.name | shorten }}</td>
+          <!-- <td style="position: relative; left: 0;" (click)="userCopy.onClicked(entry?.value.userID)"> <app-copytoclip #userCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.userID)">{{ entry?.value.userID | hidepass:passwordVisible }}</span> </td> -->
+          <!-- <td style="position: relative; left: 0;" (click)="passCopy.onClicked(entry?.value.pass)"> <app-copytoclip #passCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.pass)">{{ entry?.value.pass | hidepass:passwordVisible }} </span> </td> -->
+          <td class="fixed-width" style="position: relative; left: 0;" (click)="userCopy.onClicked(entry?.value.userID)"> 
+            <app-copytoclip #userCopy></app-copytoclip> 
+            <span (click)="copyToClipboard(entry?.value.userID)">{{ entry?.value.userID | hidepass:passwordVisible }}</span> 
+          </td>
+          
+          <td class="fixed-width" (click)="passCopy.onClicked(entry?.value.pass)"> 
+            <app-copytoclip #passCopy></app-copytoclip> 
+            <span (click)="copyToClipboard(entry?.value.pass)">{{ entry?.value.pass | hidepass:passwordVisible }} </span> 
+          </td>
+          <td style="position: relative; left: 0;" (mouseenter)="urlHover.showText(entry?.value.url)" (mouseleave)="urlHover.hideText()"> <app-hover-text #urlHover></app-hover-text> <span><a [href]="entry?.value.url" target="_blank">Visit</a></span> <div style="position: absolute; top: 8px; left: -50px;" (click)="togglePasswordVisibility()"><i style="font-size: 0.9rem;" [ngClass]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></div> </td>
+          <td> <i class="fa-regular fa-note-sticky" style="cursor: pointer; padding-left: 12px;" (click)="noteBox.openNote(entry?.value.note, entry?.value.createdBy, entry?.key, 'website')"></i> <app-notepopup #noteBox></app-notepopup> </td> 
+          <td><i class="fa-regular fa-pen-to-square ticon" style="padding-left: 8px;" (click)="onOpenEdit(entry?.key, i)"></i></td>
+          <td><a><i class="fa-solid fa-trash ticon" style="padding-left: 18px;" (click)="onDeleted(entry?.key, entry?.value.createdBy)"></i></a></td>
+          </tr>
+    </tbody>
+  </table>
+
+  
+</div>
+
+<ng-template #userPanel>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">User id</th>
+        <th scope="col">Password</th>
+        <th scope="col">URL</th>
+        <th scope="col">Note</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of websites | keyvalue | filterDataWebsite:filterData; let i = index">
+        <th>{{ i+1 }}</th>
+        <td style="position: relative; left: 0;" (mouseenter)="nameHover.showText(entry?.value.name)" (mouseleave)="nameHover.hideText()"><app-hover-text #nameHover></app-hover-text>{{ entry?.value.name | shorten }}</td>
+        <td style="position: relative; left: 0;" (click)="userCopy.onClicked(entry?.value.userID)"> <app-copytoclip #userCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.userID)">{{ entry?.value.userID | hidepass }}</span> </td>
+        <td style="position: relative; left: 0;" (click)="passCopy.onClicked(entry?.value.pass)"> <app-copytoclip #passCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.pass)">{{ entry?.value.pass | hidepass }}</span> </td>
+        <td style="position: relative; left: 0;" (click)="urlCopy.onClicked(entry?.value.url)" (mouseenter)="urlHover.showText(entry?.value.url)" (mouseleave)="urlHover.hideText()"> <app-hover-text #urlHover></app-hover-text> <app-copytoclip #urlCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.url)"><a [href]="entry?.value.url" target="_blank">Visit</a></span> </td>
+        <td> <i class="fa-regular fa-note-sticky" style="cursor: pointer; padding-left: 12px;" (click)="noteBox.openNote(entry?.value.note, entry?.value.createdBy, entry?.key, 'website')"></i> <app-notepopup #noteBox></app-notepopup> </td> 
+        <td><i class="fa-regular fa-pen-to-square ticon" style="padding-left: 8px;" (click)="onOpenEdit(entry?.key, i)"></i></td>
+        <td><a><i class="fa-solid fa-trash ticon" style="padding-left: 18px;" (click)="onDeleted(entry?.key, entry?.value.createdBy)"></i></a></td>
+        </tr>
+  </tbody>
+  </table>
+</ng-template>
+
+
+
+<div class="web-outter-container" *ngIf="isEdit">
+  <div class="web-container" (keydown.esc)="onClose()">
+      <h2>Edit Form</h2>
+      <form #Editform="ngForm" (ngSubmit)="onSubmitEdit(Editform)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            [ngModel]="editValue.name"
+            required
+          />
+        </div>
+    
+        <div class="form-group">
+          <label for="userId">User ID</label>
+          <input
+            type="text"
+            id="userID"
+            name="userID"
+            class="form-control"
+            [ngModel]="editValue.userID"
+          />
+        </div>
+    
+        <div class="form-group" style="position: relative;">
+          <label for="password">Password</label>
+          <input
+            type="{{passwordVisible ? 'text' : 'password'}}"
+            id="password"
+            name="pass"
+            class="form-control"
+            [ngModel]="editValue.pass"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+          >
+            <i [ngClass]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+          </button>
+        </div>
+  
+        <div class="form-group">
+          <label for="url">Website URL</label>
+          <input
+            type="url"
+            id="url"
+            name="url"
+            class="form-control"
+            [ngModel]="editValue.url"
+            required
+          />
+        </div>
+        
+        <div class="form-group" style="display: none;">
+          <label for="editedBy">Edited By</label>
+          <input
+            id="editedBy"
+            name="editedBy"
+            class="form-control"
+            [ngModel]="this.currectUser?.uid"         
+          />
+        </div>
+    
+
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary" (click)="onClear(Editform)">Clear</button>
+          <button type="button" class="btn btn-danger" (click)="onClose()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="web-outter-container" *ngIf="isAdded">
+    <div class="web-container">
+        <h2>Add Form</h2>
+        <form #Addform="ngForm" (ngSubmit)="onSubmitAdded(Addform)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              ngModel
+              #name="ngModel"
+            />
+          </div>
+      
+          <div class="form-group">
+            <label for="userId">User ID</label>
+            <input
+              type="text"
+              id="userID"
+              name="userID"
+              class="form-control"
+              ngModel
+              #userID="ngModel"
+            />
+          </div>
+      
+          <div class="form-group" style="position: relative;">
+            <label for="password">Password</label>
+            <input
+              type="{{passwordVisible ? 'text' : 'password'}}"
+              id="password"
+              name="pass"
+              class="form-control"
+              ngModel
+              #pass="ngModel"
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+            >
+              <i [ngClass]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+            </button>
+          </div>
+    
+          <div class="form-group">
+            <label for="url">Website URL</label>
+            <input
+              type="url"
+              id="url"
+              name="url"
+              class="form-control"
+              ngModel
+              #url="ngModel"
+            />
+          </div>
+      
+  
+          <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea
+              id="notes"
+              name="note"
+              class="form-control"
+              ngModel
+              #note="ngModel"
+            ></textarea>
+          </div>
+      
+
+          <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" (click)="onClear(Addform)">Clear</button>
+            <button type="button" class="btn btn-danger" (click)="onClose()">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>

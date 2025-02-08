@@ -1,0 +1,49 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div class="container-fluid" *ngIf="!isLoading">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0;">
+    <h2>Access control</h2>
+    <div>
+      <button class="btn btn-primary" style="margin-right: 0.8rem;" [disabled]="!ischekced" (click)="submitChanges()">Save Changes</button>
+      <button class="btn btn-primary" (click)="onRestAccess()">Defualt</button>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <h3></h3>
+
+    <div class="filter-box" style="width: 500px; margin-bottom: 10px; position: relative;" (keydown.esc)="onClearSearch()">
+      <input class="search-input" type="text" placeholder="Enter value to search" class="form-control" [(ngModel)]="searchText">
+      <i class="fa-solid fa-xmark search-input-close" *ngIf="searchText" (click)="onClearSearch()"></i>
+  </div>
+
+    <div class="gridBox mt-3">
+      <div class="accessConroleBox" *ngFor="let page of accessControlsKey | pageFilter: searchText">
+        <label>{{ page }}</label>
+        <div class="access-control-grid">
+          <!-- <select multiple [(ngModel)]="selectedRoles[page]">
+            <option *ngFor="let role of ['superuser', 'admin', 'user']" [value]="role">
+              {{ role }} <div style="z-index: 998;"><input type="checkbox"></div>
+            </option>
+          </select> -->
+          <div class="checkbox-group" style="background-color: #fff; border: 1px solid #ddd; padding: 0.8rem;">
+            <div *ngFor="let role of ['superuser', 'admin', 'user']">
+              <label style="display: flex; justify-content: space-between;">
+                <div style="font-weight: 600;">
+                  {{ role }}
+                </div>
+                
+                <input
+                  type="checkbox"
+                  [checked]="accessControls[page]?.includes(role)"
+                  (change)="onCheckboxChange($event, page, role)"
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

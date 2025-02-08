@@ -1,0 +1,19 @@
+<div class="positionBox">
+    <div class="inner-possitionBox">
+        <app-nav></app-nav>
+        <router-outlet/>
+    </div>
+    <div class="inner-possitionBox">
+        <app-footer></app-footer>
+    </div>
+</div>
+
+<div class="chat-container" *ngIf="isAuthenticated" (click)="isChated()" routerLink="/chat">
+    <div class="chat-logo">
+        <div class="typing-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+    </div>
+</div>
