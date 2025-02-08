@@ -6,7 +6,7 @@
 <div class="container" *ngIf="!isLoading">
 
     <div class="headerBox">
-        <h3>Website</h3>
+        <h3>Credentials</h3>
         <div class="otherBox">
           <div class="export-box" >
             <ul>
@@ -51,7 +51,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col">User id</th>
+        <th scope="col">Username</th>
         <th scope="col">Password</th>
         <th scope="col">URL</th>
         <th scope="col">Note</th>
@@ -62,23 +62,15 @@
     <tbody>
         <tr *ngFor="let entry of websites | keyvalue | filterDataWebsiteUser:selectedUser | filterDataWebsite:filterData; let i = index">
           <th>{{ i+1 }}</th>
-          <td class="webName-fixed-width" style="position: relative; left: 0;" (mouseenter)="nameHover.showText(entry?.value.name)" (mouseleave)="nameHover.hideText()"><app-hover-text #nameHover></app-hover-text>{{ entry?.value.name | shorten }}</td>
-          <!-- <td style="position: relative; left: 0;" (click)="userCopy.onClicked(entry?.value.userID)"> <app-copytoclip #userCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.userID)">{{ entry?.value.userID | hidepass:passwordVisible }}</span> </td> -->
-          <!-- <td style="position: relative; left: 0;" (click)="passCopy.onClicked(entry?.value.pass)"> <app-copytoclip #passCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.pass)">{{ entry?.value.pass | hidepass:passwordVisible }} </span> </td> -->
-          <td class="fixed-width" style="position: relative; left: 0;" (click)="userCopy.onClicked(entry?.value.userID)"> 
-            <app-copytoclip #userCopy></app-copytoclip> 
-            <span (click)="copyToClipboard(entry?.value.userID)">{{ entry?.value.userID | hidepass:passwordVisible }}</span> 
-          </td>
-          
-          <td class="fixed-width" (click)="passCopy.onClicked(entry?.value.pass)"> 
-            <app-copytoclip #passCopy></app-copytoclip> 
-            <span (click)="copyToClipboard(entry?.value.pass)">{{ entry?.value.pass | hidepass:passwordVisible }} </span> 
-          </td>
-          <td style="position: relative; left: 0;" (mouseenter)="urlHover.showText(entry?.value.url)" (mouseleave)="urlHover.hideText()"> <app-hover-text #urlHover></app-hover-text> <span><a [href]="entry?.value.url" target="_blank">Visit</a></span> <div style="position: absolute; top: 8px; left: -50px;" (click)="togglePasswordVisibility()"><i style="font-size: 0.9rem;" [ngClass]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></div> </td>
+          <td style="position: relative; left: 0;" class="webName-fixed-width" (mouseenter)="nameHover.showText(entry?.value.name)" (mouseleave)="nameHover.hideText()"><app-hover-text #nameHover></app-hover-text>{{ entry?.value.name | shorten | uppercase }}</td>
+          <td style="position: relative; left: 0;" (click)="userCopy.onClicked(entry?.value.userID)"> <app-copytoclip #userCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.userID)">{{ entry?.value.userID }}</span> </td>
+          <td style="position: relative; left: 0;" (click)="passCopy.onClicked(entry?.value.pass)"> <app-copytoclip #passCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.pass)">{{ entry?.value.pass | hidepass }} </span> </td>
+          <td style="position: relative; left: 0;" (click)="urlCopy.onClicked(entry?.value.url)" (mouseenter)="urlHover.showText(entry?.value.url)" (mouseleave)="urlHover.hideText()"> <app-hover-text #urlHover></app-hover-text> <app-copytoclip #urlCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.url)"><a [href]="entry?.value.url" target="_blank">Visit</a></span> </td>
           <td> <i class="fa-regular fa-note-sticky" style="cursor: pointer; padding-left: 12px;" (click)="noteBox.openNote(entry?.value.note, entry?.value.createdBy, entry?.key, 'website')"></i> <app-notepopup #noteBox></app-notepopup> </td> 
           <td><i class="fa-regular fa-pen-to-square ticon" style="padding-left: 8px;" (click)="onOpenEdit(entry?.key, i)"></i></td>
           <td><a><i class="fa-solid fa-trash ticon" style="padding-left: 18px;" (click)="onDeleted(entry?.key, entry?.value.createdBy)"></i></a></td>
           </tr>
+          
     </tbody>
   </table>
 

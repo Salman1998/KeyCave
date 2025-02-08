@@ -19,7 +19,7 @@ export class AdminPanelComponent {
   
   resetAccessControls = {
     'home': ['user', 'admin', 'superuser'],
-    'website': ['admin', 'superuser'],
+    'credentials': ['admin', 'superuser'],
     'denials': ['user', 'admin', 'superuser'],
     'admin-panel': ['admin', 'superuser'],
     'insurance-number': ['user', 'admin', 'superuser'],

@@ -17,7 +17,7 @@ import { RecycleBinComponent } from './recycle-bin/recycle-bin.component';
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, canActivate:[AuthGuard, AdminGuard]},
-  {path: 'website', component: WebsiteComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'credentials', component: WebsiteComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: 'admin-panel', component: AdminPanelComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: 'recycle-bin', component: RecycleBinComponent, canActivate:[AuthGuard, AdminGuard]},

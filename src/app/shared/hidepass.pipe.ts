@@ -5,14 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class HidepassPipe implements PipeTransform {
 
-  transform(value: any, visibility: boolean ) {
+  transform(value: any ) {
     if(value === '' || value === undefined || value ===null){
       return value?.replace(value, '-')
     }
 
-    if(!visibility){
-      return value;
-    }
+    // if(!visibility){
+    //   return value;
+    // }
 
     return value?.replace(value, `******`);
   }
