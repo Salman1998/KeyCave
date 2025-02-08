@@ -41,7 +41,6 @@
 .webName-fixed-width {
   width: 500px;
   max-width: 540px;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: wrap;
 }

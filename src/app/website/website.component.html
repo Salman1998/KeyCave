@@ -62,7 +62,7 @@
     <tbody>
         <tr *ngFor="let entry of websites | keyvalue | filterDataWebsiteUser:selectedUser | filterDataWebsite:filterData; let i = index">
           <th>{{ i+1 }}</th>
-          <td style="position: relative; left: 0;" class="webName-fixed-width" (mouseenter)="nameHover.showText(entry?.value.name)" (mouseleave)="nameHover.hideText()"><app-hover-text #nameHover></app-hover-text>{{ entry?.value.name | shorten | uppercase }}</td>
+          <td style="position: relative; left: 0;" class="webName-fixed-width" (mouseenter)="nameHover.showText(entry?.value.name)" (mouseleave)="nameHover.hideText()"><app-hover-text #nameHover></app-hover-text>{{ entry?.value.name | shorten }}</td>
           <td style="position: relative; left: 0;" (click)="userCopy.onClicked(entry?.value.userID)"> <app-copytoclip #userCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.userID)">{{ entry?.value.userID }}</span> </td>
           <td style="position: relative; left: 0;" (click)="passCopy.onClicked(entry?.value.pass)"> <app-copytoclip #passCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.pass)">{{ entry?.value.pass | hidepass }} </span> </td>
           <td style="position: relative; left: 0;" (click)="urlCopy.onClicked(entry?.value.url)" (mouseenter)="urlHover.showText(entry?.value.url)" (mouseleave)="urlHover.hideText()"> <app-hover-text #urlHover></app-hover-text> <app-copytoclip #urlCopy></app-copytoclip> <span (click)="copyToClipboard(entry?.value.url)"><a [href]="entry?.value.url" target="_blank">Visit</a></span> </td>
