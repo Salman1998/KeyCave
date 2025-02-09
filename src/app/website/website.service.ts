@@ -1,9 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { user } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +36,8 @@ export class WebsiteService implements OnDestroy {
 
   fetchWebsitesData(): void {
 
-    this.isLoading.next(true);
+      this.isLoading.next(true);
+
 
     if (!this.currentUser?.uid) return;
 
@@ -69,6 +69,7 @@ export class WebsiteService implements OnDestroy {
     })
 
     this.subscriptions.push(websiteSub);
+
     this.isLoading.next(false);
 
   }

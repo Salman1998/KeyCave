@@ -85,28 +85,7 @@ import { RecycleBinComponent } from './recycle-bin/recycle-bin.component';
     AngularFireDatabaseModule,
     HttpClientModule
   ],
-  providers: [
-    // provideFirebaseApp(() => initializeApp({
-    //   apiKey: "AIzaSyB8cuyOlwNjBEqfP2ptgpyp851y1Xj0Fa8",
-    //   authDomain: "key-cave.firebaseapp.com",
-    //   projectId: "key-cave",
-    //   storageBucket: "key-cave.firebasestorage.app",
-    //   messagingSenderId: "234201580921",
-    //   appId: "1:234201580921:web:2a94f63b7a74fdef3f5ba8",
-    //   measurementId: "G-GJLGGHVYHZ"
-    //   })),
-    // provideAuth(() => getAuth()),
-    // provideDatabase(() => getDatabase()),
-    // provideFirebaseApp(() => initializeApp({
-    //   apiKey: "AIzaSyB8cuyOlwNjBEqfP2ptgpyp851y1Xj0Fa8",
-    //   authDomain: "key-cave.firebaseapp.com",
-    //   projectId: "key-cave",
-    //   storageBucket: "key-cave.firebasestorage.app",
-    //   messagingSenderId: "234201580921",
-    //   appId: "1:234201580921:web:2a94f63b7a74fdef3f5ba8",
-    //   measurementId: "G-GJLGGHVYHZ"
-    //   }))
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

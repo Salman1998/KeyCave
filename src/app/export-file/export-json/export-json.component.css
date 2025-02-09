@@ -1,44 +1,23 @@
 .positionBox{
-    position: relative;
-    display: flex;
-    align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
-.json-button {
-    width: 173px;
-    /* font-size: 16px; */
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    padding: 8px ;
-    background-color: #fff;
+.json-btn{
+  width: 100%;
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  background-color: transparent; 
+  border: none;
+}
 
-  }
+.img-box{
+  width: 30px;
+  height: 30px;
+}
 
-  .json-button span{
-    display: block;
-    width: 40px;
-    overflow: hidden;
-  }
-  
-  .json-button img {
-    aspect-ratio: 3/2;
-    object-fit: contain;
-    width: 30px;
-    /* height: 20px; */
-  }
-  
-  .json-button:hover {
-    background-color: #ddd; /* Darker Green */
-    /* margin-left: 0; */   
-    /* box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3); */
-    /* transform: scale(1.05); */
-  }
-  
-  .json-button:active {
-    transform: scale(0.25);
-  }
-  
+p{
+  margin: 0;
+  padding-left: 10px;
+}

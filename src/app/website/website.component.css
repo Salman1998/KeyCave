@@ -60,7 +60,7 @@
 
 .search-input-close{
   position: absolute; 
-  right: 0; 
+  right: 4px; 
   top: 3px; 
   padding: 12px; 
   font-size: 18px; 

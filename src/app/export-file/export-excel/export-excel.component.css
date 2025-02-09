@@ -1,37 +1,23 @@
 .positionBox{
-    position: relative;
-    display: flex;
-    align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
-.excel-button {
-  width: 173px;
-    background-color: #fff;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    padding: 8px ;
-  }
-  
-  ul.dropdown-menu.show{
-    padding: 0;
-  }
-  .excel-button img {
-    aspect-ratio: 3/2;
-    object-fit: contain;
-    width: 30px;
-    /* height: 20px; */
-  }
-  
-  .excel-button:hover {
-    background-color: #dfdfdf;
-    gap: 8px;
-  }
-  
-  .excel-button:active {
-    transform: scale(0.25);
-  }
-  
+.excel-btn{
+  width: 100%;
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  background-color: transparent; 
+  border: none;
+}
+
+.img-box{
+  width: 30px;
+  height: 30px;
+}
+
+p{
+  margin: 0;
+  padding-left: 10px;
+}

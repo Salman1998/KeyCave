@@ -1,9 +1,7 @@
 
-  <app-spinner *ngIf="isLoading"></app-spinner>
+<app-spinner *ngIf="isLoading"></app-spinner>
   
-
-
-<div class="container" *ngIf="!isLoading">
+<div class="container" *ngIf="websites">
 
     <div class="headerBox">
         <h3>Credentials</h3>
@@ -73,8 +71,6 @@
           
     </tbody>
   </table>
-
-  
 </div>
 
 <ng-template #userPanel>
